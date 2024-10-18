@@ -1,0 +1,18 @@
+Instance Type,vCPUs,Instance Memory (GiB),GPU Model,GPUs,Total GPU Memory (GB),Memory per GPU (GB)
+ml.p5.48xlarge,192,2048,NVIDIA H100,8,640,80
+ml.p4d.24xlarge,96,1152,NVIDIA A100,8,320,40
+ml.p4de.24xlarge,96,1152,NVIDIA A100,8,640,80
+ml.g4dn.xlarge,4,16,NVIDIA T4,1,16,16
+ml.g4dn.2xlarge,8,32,NVIDIA T4,1,16,16
+ml.g4dn.4xlarge,16,64,NVIDIA T4,1,16,16
+ml.g4dn.8xlarge,32,128,NVIDIA T4,1,16,16
+ml.g4dn.16xlarge,64,256,NVIDIA T4,1,16,16
+ml.g4dn.12xlarge,48,192,NVIDIA T4,4,64,16
+ml.g5n.xlarge,4,16,NVIDIA A10G,1,24,24
+ml.g5.2xlarge,8,32,NVIDIA A10G,1,24,24
+ml.g5.4xlarge,16,64,NVIDIA A10G,1,24,24
+ml.g5.8xlarge,32,128,NVIDIA A10G,1,24,24
+ml.g5.16xlarge,64,256,NVIDIA A10G,1,24,24
+ml.g5.12xlarge,48,192,NVIDIA A10G,4,96,24
+ml.g5.24xlarge,96,384,NVIDIA A10G,4,96,24
+ml.g5.48xlarge,192,768,NVIDIA A10G,8,192,24

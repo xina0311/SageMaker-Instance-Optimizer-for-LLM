@@ -1,4 +1,4 @@
-# SageMaker Instance Optimizer for LLM
+# SageMaker Instance Type Optimizer for LLM
 
 This application helps optimize the selection of Amazon SageMaker instances for Large Language Models (LLMs) based on memory requirements for both inference and training tasks.
 

@@ -171,7 +171,7 @@ def filter_instances(df, required_memory):
 
 t = set_lang()
 
-st.markdown('<h1 class="main-title">SageMaker Instance Optimizer for LLM</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-title">SageMaker Instance Type Optimizer for LLM</h1>', unsafe_allow_html=True)
 
 # Sidebar
 st.sidebar.title(t["sidebar_title"])

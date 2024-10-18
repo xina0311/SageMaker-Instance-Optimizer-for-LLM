@@ -1,4 +1,4 @@
-# SageMaker LLM 实例优化器
+# SageMaker LLM 实例类型优化器
 
 该应用程序帮助根据推理和训练任务的内存需求优化 Amazon SageMaker 实例的选择，专为大型语言模型（LLMs）设计。
 

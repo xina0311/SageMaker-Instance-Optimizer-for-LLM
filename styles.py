@@ -58,8 +58,10 @@ def get_styles():
     .red-text {
         color: red;
     }
-    /* Ensure input fields have consistent width */
-    .stTextInput, .stNumberInput, .stSelectbox {
+    /* Ensure input fields adapt to sidebar width */
+    #sidebar-content .stTextInput, 
+    #sidebar-content .stNumberInput, 
+    #sidebar-content .stSelectbox {
         width: 100% !important;
     }
     /* Add custom CSS for the resize handle */
@@ -94,7 +96,7 @@ def get_styles():
         if (width > 200 && width < 800) {
             sidebar.style.width = width + 'px';
             lastDownX = e.clientX;
-            adjustFontSize();
+            adjustSidebarContent();
         }
     });
 
@@ -102,16 +104,24 @@ def get_styles():
         isResizing = false;
     });
 
-    function adjustFontSize() {
+    function adjustSidebarContent() {
         const sidebarWidth = sidebar.offsetWidth;
-        const scaleFactor = Math.max(0.7, Math.min(1, sidebarWidth / 400));
+        const sidebarContent = sidebar.querySelector('#sidebar-content');
+        if (sidebarContent) {
+            sidebarContent.style.width = (sidebarWidth - 40) + 'px';  // Adjust for padding
+        }
         const inputs = sidebar.querySelectorAll('input, select');
+        const scaleFactor = Math.max(0.7, Math.min(1, sidebarWidth / 400));
         inputs.forEach(input => {
             input.style.fontSize = `${14 * scaleFactor}px`;
+            input.style.width = '100%';
         });
     }
 
-    // Initial font size adjustment
-    adjustFontSize();
+    // Initial adjustment
+    adjustSidebarContent();
+
+    // Adjust on window resize
+    window.addEventListener('resize', adjustSidebarContent);
 </script>
 """

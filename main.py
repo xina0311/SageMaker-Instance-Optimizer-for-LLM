@@ -1,5 +1,5 @@
 import streamlit as st
-from lang import set_lang
+from lang import set_lang, change_lang
 from styles import get_styles
 from calculations import calculate_inference_memory, calculate_training_memory
 from utils import read_sagemaker_instances, filter_instances
@@ -9,26 +9,35 @@ st.markdown(get_styles(), unsafe_allow_html=True)
 
 t = set_lang()
 
-st.markdown('<h1 class="main-title">SageMaker Instance Type Optimizer for LLM</h1>', unsafe_allow_html=True)
+# Language selector
+st.sidebar.selectbox(
+    t['lang_selector'],
+    ('English', '中文'),
+    index=0 if st.session_state.language == 'en' else 1,
+    on_change=change_lang,
+    key='lang_select'
+)
+
+st.markdown(f'<h1 class="main-title">{t["sidebar_title"]}</h1>', unsafe_allow_html=True)
 
 # Sidebar
 st.sidebar.title(t["sidebar_title"])
 
 # Required parameters
-model = st.sidebar.text_input(t["model"], value='Llama-3.1-70B-Instruct')
-model_params = st.sidebar.text_input(t["params"], value='70.0')
-precision = st.sidebar.selectbox(t["precision"], ['float16', 'float32', 'bfloat16', 'int8', 'int4'])
+model = st.sidebar.text_input(t["model"], value='Llama-3.1-70B-Instruct', help=t["model_desc"])
+model_params = st.sidebar.text_input(t["params"], value='70.0', help=t["params_desc"])
+precision = st.sidebar.selectbox(t["precision"], ['float16', 'float32', 'bfloat16', 'int8', 'int4'], help=t["precision_desc"])
 
 # Optional parameters
 st.sidebar.subheader(t['optional_params'])
-batch_size = st.sidebar.text_input(t["batch_size"], value='1')
-sequence_length = st.sidebar.text_input(t["seq_len"], value='2048')
-hidden_size = st.sidebar.text_input(t["hidden_size"], value='8192')
-num_layers = st.sidebar.text_input(t["num_layers"], value='80')
-num_attention_heads = st.sidebar.text_input(t["num_heads"], value='64')
+batch_size = st.sidebar.text_input(t["batch_size"], value='1', help=t["batch_size_desc"])
+sequence_length = st.sidebar.text_input(t["seq_len"], value='2048', help=t["seq_len_desc"])
+hidden_size = st.sidebar.text_input(t["hidden_size"], value='8192', help=t["hidden_size_desc"])
+num_layers = st.sidebar.text_input(t["num_layers"], value='80', help=t["num_layers_desc"])
+num_attention_heads = st.sidebar.text_input(t["num_heads"], value='64', help=t["num_heads_desc"])
 
 # Main content
-tab1, tab2 = st.tabs(["Inference", "Training"])
+tab1, tab2 = st.tabs([t["inf_mem"], t["train_mem"]])
 
 sagemaker_instances = read_sagemaker_instances()
 
@@ -41,7 +50,7 @@ try:
     num_layers = int(num_layers)
     num_attention_heads = int(num_attention_heads)
 except ValueError:
-    st.error("Please enter valid numerical values for all parameters.")
+    st.error(t["invalid_input"])
     st.stop()
 
 with tab1:
@@ -102,15 +111,7 @@ with tab2:
     st.latex(r"\text{Gradient Memory} = \begin{cases} 4 \times \text{params}, & \text{for fp32} \\ 2 \times \text{params}, & \text{for fp16} \end{cases}")
     st.latex(r"\text{Activation Memory (with Full Recomputation)} = 2 \times \text{Batch Size} \cdot \text{Sequence Length} \cdot \text{Hidden Size} \cdot \text{Number of Layers}")
 
-st.subheader("Disclaimer")
-st.markdown("""
-- Hidden size, number of layers, and number of attention heads are estimated based on the model size, but can be adjusted manually.
-- We assume fp16 for simplicity in memory estimation, though models support fp32, fp16, and mixed-precision training. For fp32, select float32 in parameters.
-- This calculation excludes additional memory needs for distributed training, which may increase GPU memory usage.
-""")
-
-st.markdown("---")
-st.subheader(t['notes'])
+st.subheader(t["notes"])
 for note in [t['note1'], t['note2'], t['note3'], t['note4'], t['note5'], t['note6'], t['note7']]:
     st.markdown(f"- {note}")
 

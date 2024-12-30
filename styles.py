@@ -56,19 +56,17 @@ def get_styles():
         color: red;
     }
     /* Ensure input fields adapt to sidebar width */
-    #sidebar-content .stTextInput, 
-    #sidebar-content .stNumberInput, 
-    #sidebar-content .stSelectbox {
+    .stTextInput, .stNumberInput, .stSelectbox {
         width: 100% !important;
     }
     /* Improve responsiveness for smaller screens */
     @media (max-width: 768px) {
-        [data-testid="stSidebar"][aria-expanded="true"] > div:first-child {
-            width: 100%;
-        }
         .main .block-container {
             padding-left: 1rem;
             padding-right: 1rem;
+        }
+        [data-testid="stSidebar"][aria-expanded="true"] > div:first-child {
+            width: 100%;
         }
     }
 </style>

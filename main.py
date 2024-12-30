@@ -9,6 +9,15 @@ st.markdown(get_styles(), unsafe_allow_html=True)
 
 t = set_lang()
 
+# Language selector at the top of the sidebar
+st.sidebar.selectbox(
+    t['lang_selector'],
+    ('English', '中文'),
+    index=0 if st.session_state.language == 'en' else 1,
+    on_change=change_lang,
+    key='lang_select'
+)
+
 st.markdown(f'<h1 class="main-title">{t["sidebar_title"]}</h1>', unsafe_allow_html=True)
 
 # Sidebar
@@ -110,13 +119,3 @@ st.subheader(t['reference'])
 st.markdown("[Transformer Math 101](https://blog.eleuther.ai/transformer-math/)")
 st.markdown("[Calculating GPU memory for serving LLMs](https://www.substratus.ai/blog/calculating-gpu-memory-for-llm)")
 st.markdown("[LLM-System-Requirements](https://github.com/manuelescobar-dev/LLM-System-Requirements)")
-
-# Language selector at the bottom of the sidebar
-st.sidebar.markdown("<br>" * 10, unsafe_allow_html=True)  # Add some space
-st.sidebar.selectbox(
-    t['lang_selector'],
-    ('English', '中文'),
-    index=0 if st.session_state.language == 'en' else 1,
-    on_change=change_lang,
-    key='lang_select'
-)

@@ -61,5 +61,15 @@ def get_styles():
     #sidebar-content .stSelectbox {
         width: 100% !important;
     }
+    /* Improve responsiveness for smaller screens */
+    @media (max-width: 768px) {
+        [data-testid="stSidebar"][aria-expanded="true"] > div:first-child {
+            width: 100%;
+        }
+        .main .block-container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    }
 </style>
 """

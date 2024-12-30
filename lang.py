@@ -8,6 +8,7 @@ def set_lang():
         'en': {
             'lang_selector': 'Language',
             'sidebar_title': 'Model Parameters',
+            'main_title': 'Estimated Memory Usage',
             'model': 'Model Name',
             'params': 'Number of parameters (in billions)',
             'precision': 'Precision',
@@ -54,6 +55,7 @@ def set_lang():
         'zh': {
             'lang_selector': '语言',
             'sidebar_title': '模型参数',
+            'main_title': '预估显存用量',
             'model': '模型名称',
             'params': '参数数量（十亿）',
             'precision': '精度',

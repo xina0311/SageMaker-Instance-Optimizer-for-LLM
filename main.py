@@ -34,7 +34,7 @@ num_layers = st.sidebar.text_input(t["num_layers"], value='80', help=t["num_laye
 num_attention_heads = st.sidebar.text_input(t["num_heads"], value='64', help=t["num_heads_desc"])
 
 # Main content
-st.title(t["sidebar_title"])
+st.title(t["main_title"])
 
 tab1, tab2 = st.tabs([t["inf_mem"], t["train_mem"]])
 

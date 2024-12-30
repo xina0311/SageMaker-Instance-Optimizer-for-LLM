@@ -1,6 +1,6 @@
 # SageMaker LLM 实例类型优化器
 
-该 Streamlit 应用程序帮助通过计算推理和训练的内存需求，优化大型语言模型（LLMs）的 SageMaker 实例类型选择。
+该 Streamlit 应用程序通过计算推理和训练的内存需求，帮助优化大型语言模型（LLMs）的 SageMaker 实例类型选择。
 
 ## 项目结构
 
@@ -11,7 +11,12 @@
 - `utils.py`: 包含用于读取和过滤 SageMaker 实例的实用函数
 - `sagemaker_gpu_instances.csv`: 包含 SageMaker GPU 实例信息的 CSV 文件
 
-## 设置和运行应用程序
+## 要求
+
+- Python 3.8 - 3.11
+- 依赖项列在 `requirements.txt` 中
+
+## 本地设置和运行应用程序
 
 1. 安装所需依赖：
    ```
@@ -24,6 +29,16 @@
    ```
 
 3. 在网络浏览器中打开 Streamlit 提供的 URL（通常是 http://localhost:8501）。
+
+## 在 Streamlit.io 上部署
+
+1. 将此仓库 fork 到您的 GitHub 账户。
+2. 前往 [streamlit.io](https://streamlit.io/) 并使用您的 GitHub 账户登录。
+3. 创建一个新的应用并选择您 fork 的仓库。
+4. 将主文件路径设置为 `main.py`。
+5. 部署应用。
+
+注意：Streamlit.io 使用 `requirements.txt` 文件安装依赖项，所以请确保它是最新的。
 
 ## 功能
 

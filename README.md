@@ -11,7 +11,12 @@ This Streamlit application helps optimize the selection of SageMaker instance ty
 - `utils.py`: Contains utility functions for reading and filtering SageMaker instances
 - `sagemaker_gpu_instances.csv`: CSV file containing SageMaker GPU instance information
 
-## Setup and Running the App
+## Requirements
+
+- Python 3.8 - 3.11
+- Dependencies listed in `requirements.txt`
+
+## Setup and Running the App Locally
 
 1. Install the required dependencies:
    ```
@@ -24,6 +29,16 @@ This Streamlit application helps optimize the selection of SageMaker instance ty
    ```
 
 3. Open your web browser and navigate to the URL provided by Streamlit (usually http://localhost:8501).
+
+## Deploying on Streamlit.io
+
+1. Fork this repository to your GitHub account.
+2. Go to [streamlit.io](https://streamlit.io/) and sign in with your GitHub account.
+3. Create a new app and select the forked repository.
+4. Set the main file path to `main.py`.
+5. Deploy the app.
+
+Note: Streamlit.io uses the `requirements.txt` file to install dependencies, so make sure it's up to date.
 
 ## Features
 

@@ -12,6 +12,7 @@ t = set_lang()
 st.markdown('<h1 class="main-title">SageMaker Instance Type Optimizer for LLM</h1>', unsafe_allow_html=True)
 
 # Sidebar
+st.sidebar.markdown('<div id="sidebar-content">', unsafe_allow_html=True)
 st.sidebar.title(t["sidebar_title"])
 
 # Required parameters
@@ -26,6 +27,8 @@ sequence_length = st.sidebar.text_input(t["seq_len"], value='2048', help=t["seq_
 hidden_size = st.sidebar.text_input(t["hidden_size"], value='8192', help=t["hidden_size_desc"])
 num_layers = st.sidebar.text_input(t["num_layers"], value='80', help=t["num_layers_desc"])
 num_attention_heads = st.sidebar.text_input(t["num_heads"], value='64', help=t["num_heads_desc"])
+
+st.sidebar.markdown('</div>', unsafe_allow_html=True)
 
 # Main content
 tab1, tab2 = st.tabs(["Inference", "Training"])

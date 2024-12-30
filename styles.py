@@ -1,20 +1,26 @@
 def get_styles():
     return """
 <style>
+    .main .block-container {
+        padding-top: 1rem;
+        padding-bottom: 0rem;
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
     [data-testid="stSidebar"][aria-expanded="true"] > div:first-child {
         width: 400px;
+        min-width: 200px;
+        max-width: 800px;
     }
     [data-testid="stSidebar"][aria-expanded="false"] > div:first-child {
         width: 400px;
+        min-width: 200px;
         margin-left: -400px;
     }
     .main-title {
         font-size: 28px !important;
         font-weight: bold !important;
         margin-bottom: 20px !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
     }
     .stTabs [data-baseweb="tab-list"] {
         gap: 2px;
@@ -56,5 +62,56 @@ def get_styles():
     .stTextInput, .stNumberInput, .stSelectbox {
         width: 100% !important;
     }
+    /* Add custom CSS for the resize handle */
+    .resize-handle {
+        position: absolute;
+        right: -5px;
+        top: 0;
+        bottom: 0;
+        width: 10px;
+        cursor: col-resize;
+        z-index: 1000;
+    }
 </style>
+
+<script>
+    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
+    const resizeHandle = document.createElement('div');
+    resizeHandle.className = 'resize-handle';
+    sidebar.appendChild(resizeHandle);
+
+    let isResizing = false;
+    let lastDownX = 0;
+
+    resizeHandle.addEventListener('mousedown', (e) => {
+        isResizing = true;
+        lastDownX = e.clientX;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isResizing) return;
+        const width = sidebar.offsetWidth - (lastDownX - e.clientX);
+        if (width > 200 && width < 800) {
+            sidebar.style.width = width + 'px';
+            lastDownX = e.clientX;
+            adjustFontSize();
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isResizing = false;
+    });
+
+    function adjustFontSize() {
+        const sidebarWidth = sidebar.offsetWidth;
+        const scaleFactor = Math.max(0.7, Math.min(1, sidebarWidth / 400));
+        const inputs = sidebar.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.style.fontSize = `${14 * scaleFactor}px`;
+        });
+    }
+
+    // Initial font size adjustment
+    adjustFontSize();
+</script>
 """

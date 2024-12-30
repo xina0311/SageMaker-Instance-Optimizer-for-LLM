@@ -9,7 +9,7 @@ st.markdown(get_styles(), unsafe_allow_html=True)
 
 t = set_lang()
 
-# Language selector at the top of the sidebar
+# Language selector
 st.sidebar.selectbox(
     t['lang_selector'],
     ('English', '中文'),
@@ -18,9 +18,6 @@ st.sidebar.selectbox(
     key='lang_select'
 )
 
-st.markdown(f'<h1 class="main-title">{t["sidebar_title"]}</h1>', unsafe_allow_html=True)
-
-# Sidebar
 st.sidebar.title(t["sidebar_title"])
 
 # Required parameters
@@ -37,6 +34,8 @@ num_layers = st.sidebar.text_input(t["num_layers"], value='80', help=t["num_laye
 num_attention_heads = st.sidebar.text_input(t["num_heads"], value='64', help=t["num_heads_desc"])
 
 # Main content
+st.title(t["sidebar_title"])
+
 tab1, tab2 = st.tabs([t["inf_mem"], t["train_mem"]])
 
 sagemaker_instances = read_sagemaker_instances()
@@ -58,12 +57,10 @@ with tab1:
     
     st.markdown(f'<p class="memory-total">{t["total_inference"]}: {total_inference_memory:.2f} GB</p>', unsafe_allow_html=True)
     
-    st.markdown('<div class="calc-details">', unsafe_allow_html=True)
-    st.write(t["calc_details"])
+    st.subheader(t["calc_details"])
     st.write(f"{t['model_mem']}: {model_memory:.2f} GB")
     st.write(f"{t['total_mem']}: {total_inference_memory:.2f} GB")
     st.latex(r"\text{Total Memory}_{\text{Inference}} \approx 1.2 \times \text{Model Memory}")
-    st.markdown('</div>', unsafe_allow_html=True)
     
     st.subheader(t["suitable_instances"])
     suitable_instances = filter_instances(sagemaker_instances, total_inference_memory)
@@ -87,15 +84,13 @@ with tab2:
     
     st.markdown(f'<p class="memory-total">{t["total_training"]}: {total_training_memory:.2f} GB</p>', unsafe_allow_html=True)
     
-    st.markdown('<div class="calc-details">', unsafe_allow_html=True)
-    st.write(t["calc_details"])
+    st.subheader(t["calc_details"])
     st.write(f"{t['model_mem']}: {model_memory:.2f} GB")
     st.write(f"{t['opt_mem']}: {optimizer_memory:.2f} GB")
     st.write(f"{t['grad_mem']}: {gradient_memory:.2f} GB")
     st.write(f"{t['act_mem']}: {activation_memory:.2f} GB")
     st.write(f"{t['total_mem']}: {total_training_memory:.2f} GB")
     st.latex(r"\text{Total Memory}_{\text{Training}} = \text{Model Memory} + \text{Optimizer Memory} + \text{Activation Memory} + \text{Gradient Memory}")
-    st.markdown('</div>', unsafe_allow_html=True)
     
     st.subheader(t["suitable_instances"])
     suitable_instances = filter_instances(sagemaker_instances, total_training_memory)

@@ -1,39 +1,40 @@
 # SageMaker Instance Type Optimizer for LLM
 
-This application helps optimize the selection of Amazon SageMaker instances for Large Language Models (LLMs) based on memory requirements for both inference and training tasks.
+This Streamlit application helps optimize the selection of SageMaker instance types for Large Language Models (LLMs) by calculating memory requirements for both inference and training.
 
-## Features
+## Project Structure
 
-- Estimates memory requirements for LLM inference and training
-- Suggests suitable SageMaker GPU instances based on calculated memory needs
-- Supports various precision types (float32, float16, bfloat16, int8, int4)
-- Provides detailed memory breakdowns and formulas used in calculations
+- `main.py`: The main Streamlit application file
+- `lang.py`: Contains language-related functions and dictionaries
+- `styles.py`: Contains CSS and JavaScript for styling
+- `calculations.py`: Contains memory calculation functions
+- `utils.py`: Contains utility functions for reading and filtering SageMaker instances
+- `sagemaker_gpu_instances.csv`: CSV file containing SageMaker GPU instance information
 
-## How to Use
+## Setup and Running the App
 
-1. Clone the repository
-2. Install the required dependencies:
+1. Install the required dependencies:
    ```
    pip install -r requirements.txt
    ```
-3. Run the Streamlit app:
+
+2. Run the Streamlit app:
    ```
-   streamlit run gpu_memory_calculator_app.py
+   streamlit run main.py
    ```
-4. Input your model parameters in the sidebar
-5. View the results in the Inference and Training tabs
 
-## Requirements
+3. Open your web browser and navigate to the URL provided by Streamlit (usually http://localhost:8501).
 
-- Python 3.7+
-- Streamlit
-- Pandas
-- Other dependencies listed in `requirements.txt`
+## Features
 
-## Contributing
+- Calculate memory requirements for LLM inference and training
+- Support for various precisions (float32, float16, bfloat16, int8, int4)
+- Customizable model parameters
+- Visualization of suitable SageMaker GPU instances based on memory requirements
+- Detailed memory breakdown and formulas used in calculations
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+## References
 
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
+- [Transformer Math 101](https://blog.eleuther.ai/transformer-math/)
+- [Calculating GPU memory for serving LLMs](https://www.substratus.ai/blog/calculating-gpu-memory-for-llm)
+- [LLM-System-Requirements](https://github.com/manuelescobar-dev/LLM-System-Requirements)

@@ -14,20 +14,18 @@ st.markdown('<h1 class="main-title">SageMaker Instance Type Optimizer for LLM</h
 # Sidebar
 st.sidebar.title(t["sidebar_title"])
 
-# Use a container for the sidebar inputs
-with st.sidebar.container():
-    # Required parameters
-    model = st.text_input(t["model"], value='Llama-3.1-70B-Instruct', help=t["model_desc"])
-    model_params = st.text_input(t["params"], value='70.0', help=t["params_desc"])
-    precision = st.selectbox(t["precision"], ['float16', 'float32', 'bfloat16', 'int8', 'int4'], help=t["precision_desc"])
+# Required parameters
+model = st.sidebar.text_input(t["model"], value='Llama-3.1-70B-Instruct', help=t["model_desc"])
+model_params = st.sidebar.text_input(t["params"], value='70.0', help=t["params_desc"])
+precision = st.sidebar.selectbox(t["precision"], ['float16', 'float32', 'bfloat16', 'int8', 'int4'], help=t["precision_desc"])
 
-    # Optional parameters
-    st.markdown(f"### {t['optional_params']}")
-    batch_size = st.text_input(t["batch_size"], value='1', help=t["batch_size_desc"])
-    sequence_length = st.text_input(t["seq_len"], value='2048', help=t["seq_len_desc"])
-    hidden_size = st.text_input(t["hidden_size"], value='8192', help=t["hidden_size_desc"])
-    num_layers = st.text_input(t["num_layers"], value='80', help=t["num_layers_desc"])
-    num_attention_heads = st.text_input(t["num_heads"], value='64', help=t["num_heads_desc"])
+# Optional parameters
+st.sidebar.markdown(f"### {t['optional_params']}")
+batch_size = st.sidebar.text_input(t["batch_size"], value='1', help=t["batch_size_desc"])
+sequence_length = st.sidebar.text_input(t["seq_len"], value='2048', help=t["seq_len_desc"])
+hidden_size = st.sidebar.text_input(t["hidden_size"], value='8192', help=t["hidden_size_desc"])
+num_layers = st.sidebar.text_input(t["num_layers"], value='80', help=t["num_layers_desc"])
+num_attention_heads = st.sidebar.text_input(t["num_heads"], value='64', help=t["num_heads_desc"])
 
 # Main content
 tab1, tab2 = st.tabs(["Inference", "Training"])

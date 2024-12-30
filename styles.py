@@ -52,7 +52,7 @@ def get_styles():
     .red-text {
         color: red;
     }
-    /* Make sure input fields resize properly */
+    /* Ensure input fields have consistent width */
     .stTextInput, .stNumberInput, .stSelectbox {
         width: 100% !important;
     }

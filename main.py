@@ -16,21 +16,33 @@ st.sidebar.title(t["sidebar_title"])
 
 # Required parameters
 model = st.sidebar.text_input(t["model"], value='Llama-3.1-70B-Instruct')
-model_params = st.sidebar.number_input(t["params"], value=70.0, format="%.1f")
+model_params = st.sidebar.text_input(t["params"], value='70.0')
 precision = st.sidebar.selectbox(t["precision"], ['float16', 'float32', 'bfloat16', 'int8', 'int4'])
 
 # Optional parameters
 st.sidebar.subheader(t['optional_params'])
-batch_size = st.sidebar.number_input(t["batch_size"], value=1, min_value=1)
-sequence_length = st.sidebar.number_input(t["seq_len"], value=2048, min_value=1)
-hidden_size = st.sidebar.number_input(t["hidden_size"], value=8192, min_value=1)
-num_layers = st.sidebar.number_input(t["num_layers"], value=80, min_value=1)
-num_attention_heads = st.sidebar.number_input(t["num_heads"], value=64, min_value=1)
+batch_size = st.sidebar.text_input(t["batch_size"], value='1')
+sequence_length = st.sidebar.text_input(t["seq_len"], value='2048')
+hidden_size = st.sidebar.text_input(t["hidden_size"], value='8192')
+num_layers = st.sidebar.text_input(t["num_layers"], value='80')
+num_attention_heads = st.sidebar.text_input(t["num_heads"], value='64')
 
 # Main content
 tab1, tab2 = st.tabs(["Inference", "Training"])
 
 sagemaker_instances = read_sagemaker_instances()
+
+# Convert inputs to appropriate types
+try:
+    model_params = float(model_params)
+    batch_size = int(batch_size)
+    sequence_length = int(sequence_length)
+    hidden_size = int(hidden_size)
+    num_layers = int(num_layers)
+    num_attention_heads = int(num_attention_heads)
+except ValueError:
+    st.error("Please enter valid numerical values for all parameters.")
+    st.stop()
 
 with tab1:
     model_memory, total_inference_memory = calculate_inference_memory(model_params, precision)

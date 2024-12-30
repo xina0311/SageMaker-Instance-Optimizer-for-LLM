@@ -8,15 +8,6 @@ def get_styles():
         width: 400px;
         margin-left: -400px;
     }
-    .resize-handle {
-        position: absolute;
-        top: 0;
-        right: -5px;
-        width: 10px;
-        height: 100%;
-        cursor: col-resize;
-        z-index: 1000;
-    }
     .main-title {
         font-size: 28px !important;
         font-weight: bold !important;
@@ -61,30 +52,9 @@ def get_styles():
     .red-text {
         color: red;
     }
+    /* Make sure input fields resize properly */
+    .stTextInput, .stNumberInput, .stSelectbox {
+        width: 100% !important;
+    }
 </style>
-<script>
-    const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-    const resizeHandle = document.createElement('div');
-    resizeHandle.className = 'resize-handle';
-    sidebar.appendChild(resizeHandle);
-
-    let isResizing = false;
-    let lastDownX = 0;
-
-    resizeHandle.addEventListener('mousedown', (e) => {
-        isResizing = true;
-        lastDownX = e.clientX;
-    });
-
-    document.addEventListener('mousemove', (e) => {
-        if (!isResizing) return;
-        const width = sidebar.offsetWidth - (lastDownX - e.clientX);
-        sidebar.style.width = width + 'px';
-        lastDownX = e.clientX;
-    });
-
-    document.addEventListener('mouseup', () => {
-        isResizing = false;
-    });
-</script>
 """

@@ -13,7 +13,7 @@ This Streamlit application helps optimize the selection of SageMaker instance ty
 
 ## Requirements
 
-- Python 3.8 - 3.11
+- Python 3.7 - 3.11 (Note: Python 3.12 is not supported due to compatibility issues with some dependencies)
 - Dependencies listed in `requirements.txt`
 
 ## Setup and Running the App Locally
@@ -38,7 +38,7 @@ This Streamlit application helps optimize the selection of SageMaker instance ty
 4. Set the main file path to `main.py`.
 5. Deploy the app.
 
-Note: Streamlit.io uses the `requirements.txt` file to install dependencies, so make sure it's up to date.
+Note: Streamlit.io uses the `requirements.txt` file to install dependencies. If you encounter any issues with deployment, you may need to adjust the versions in the requirements.txt file to ensure compatibility with the Streamlit.io environment.
 
 ## Features
 

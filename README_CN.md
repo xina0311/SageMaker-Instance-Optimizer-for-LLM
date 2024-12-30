@@ -13,7 +13,7 @@
 
 ## 要求
 
-- Python 3.8 - 3.11
+- Python 3.7 - 3.11（注意：由于某些依赖项的兼容性问题，不支持 Python 3.12）
 - 依赖项列在 `requirements.txt` 中
 
 ## 本地设置和运行应用程序
@@ -38,7 +38,7 @@
 4. 将主文件路径设置为 `main.py`。
 5. 部署应用。
 
-注意：Streamlit.io 使用 `requirements.txt` 文件安装依赖项，所以请确保它是最新的。
+注意：Streamlit.io 使用 `requirements.txt` 文件安装依赖项。如果在部署过程中遇到任何问题，您可能需要调整 requirements.txt 文件中的版本，以确保与 Streamlit.io 环境兼容。
 
 ## 功能
 

@@ -63,6 +63,7 @@ def get_styles():
     #sidebar-content .stNumberInput, 
     #sidebar-content .stSelectbox {
         width: 100% !important;
+        transition: all 0.3s ease-in-out;
     }
     /* Add custom CSS for the resize handle */
     .resize-handle {
@@ -111,9 +112,11 @@ def get_styles():
         if (sidebarContent) {
             sidebarContent.style.width = (sidebarWidth - 40) + 'px';  // Adjust for padding
         }
-        const inputs = sidebar.querySelectorAll('input, select');
+        const inputs = sidebar.querySelectorAll('input, select, .stTextInput > div, .stNumberInput > div, .stSelectbox > div');
         inputs.forEach(input => {
             input.style.width = '100%';
+            input.style.minWidth = '100%';
+            input.style.maxWidth = '100%';
         });
     }
 
@@ -122,5 +125,17 @@ def get_styles():
 
     // Adjust on window resize
     window.addEventListener('resize', adjustSidebarContent);
+
+    // Create a MutationObserver to watch for changes in the sidebar
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'childList' || mutation.type === 'subtree') {
+                adjustSidebarContent();
+            }
+        });
+    });
+
+    // Start observing the sidebar for changes
+    observer.observe(sidebar, { childList: true, subtree: true });
 </script>
 """
